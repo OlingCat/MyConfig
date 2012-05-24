@@ -12,4 +12,4 @@ The following is a list of configuration files:
 *   [GFWList](./GFWList) - The GFWList file and the SwitchySharp backup.
 *   [GoAgent](./proxy)   - The GoAgent configuration files.
 *   [Tools](./tools)     - The useful tools list.
-*   [TPLink](./tp.bin)   - The router's options, it is my private and you do not need it.
+*   [TPLink](./tp.bin)   - The router's options, it is my *private* and you do not need it.
