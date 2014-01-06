@@ -1,7 +1,7 @@
 # MyConfigList
 
 There are some configuration files for me.
-If you are interested in someone, well, keep it.
+If you are interested in something, just keep it.
 if you have more good ideas, please **tell me**,
 I'll add them to my files. :P
 
