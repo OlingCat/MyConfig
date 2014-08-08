@@ -46,7 +46,7 @@ set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:
                             " 设置在状态行显示的信息
 
 " 显示Tab符
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
+set listchars=tab:\»\ ,trail:.,extends:>,precedes:<
 if has("autocmd")
 	autocmd filetype javascript,php,python set list
 endif
@@ -115,7 +115,7 @@ set rtp+=~/.vim/bundle/vundle/
 " call vundle#rc()
 
 " let Vundle manage Vundle
-" required!
+" required! 
 " Bundle 'gmarik/vundle'
 
 " My Bundles here:
@@ -374,3 +374,7 @@ filetype plugin indent on     " required!
 	" silent execute "!start \"d:\\Program Files\\Mozilla Firefox\\firefox.exe\" ". filepath ." -install-global-extension"
 " endfunction
 " map <S-F4> :call BrowseWebPage()<CR>
+
+" use OS clipboard
+vmap "+y :w !pbcopy<CR><CR>
+nmap "+p :r !pbpaste<CR><CR>

@@ -1,5 +1,5 @@
 ;; >>> features
-(tool-bar-mode -1) ;; hide toolbar
+;(tool-bar-mode -1) ;; hide toolbar
 ; (menu-bar-mode -1) ;; hide menubar
 (scroll-bar-mode -1) ;; hide scrollbar
 ;; <<< features

@@ -32,14 +32,6 @@ alias lm="la | more"
 alias tf="tail -f"
 # alias tree="tree -A -I 'CVS|*~'"
 
-# alias rm="rm -i"
-alias mv="mv -i"
-alias cp="cp -i"
-alias ln="ln -i"
-alias free="free -m"
-alias mkdir="mkdir -pv"
-alias dus="du -ms * | sort -n"
-
 # modified commands
 alias diff="colordiff"
 alias more="less"
@@ -57,16 +49,20 @@ alias halt="s halt"
 alias netcfg="s netcfg2"
 
 # set files
+alias rcc="vis /etc/rc.conf"
 alias vrc="vis $CAT/.vimrc"
 alias zrc="vis $CAT/.zshrc"
 alias erc="vis $CAT/.emacs"
-alias rcc="vis /etc/rc.conf"
 alias cdl="cd $CAT/Downloads"
 alias cds="cd $CAT/Source"
 alias cdg="cd $CAT/Source/Go-zh"
 alias cdo="cd $CAT/Source/Go"
-alias gdc="godoc -http=:6060"
+alias gdc="GOPATH="" godoc -http=:6060"
 alias upenv=". ~/.zshrc"
+alias ga="launchctl load /Library/LaunchDaemons/org.goagent.macos.plist"
+alias unga="launchctl unload /Library/LaunchDaemons/org.goagent.macos.plist"
+alias showfiles="defaults write com.apple.finder AppleShowAllFiles -boolean true && killall Finder"
+alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -boolean false && killall Finder"
 
 # yum
 alias yin="s yum install"
@@ -216,7 +212,7 @@ zstyle ':completion:*:*:rmdir:*' file-sort time
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 # 环境变量
-[[ -z "$PS1" ]] && return
+#[[ -z "$PS1" ]] && return
 
 # Zsh 历史记录设置
 export HISTIGNORE="&:ls:[bf]g:exit:reset:clear:cd:cd ..:cd.."
@@ -230,7 +226,7 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 
 # 命令提示符格式
-PS1=$'%B%{\e[32m%}%n%{\e[31m%}@%{\e[35m%}%m %{\e[36m%}%~ %{\e[37m%}%#%{\e[1;32m%}> %b'
+PS1=$'%B%{\e[32m%}%n%{\e[31m%}@%{\e[35m%}%m %{\e[36m%}%~ %{\e[34m%}%# %{\e[33m%}> %b'
 
 # 这些字符视为单词的一部分
 WORDCHARS='*?_[]~=&;!#$%^(){}<>'
@@ -272,15 +268,15 @@ export ZLSCOLORS="${LS_COLORS}"
 
 # zsh函数
 # Quick ../../..
-rationalise-dot() {
-    if [[ $LBUFFER = *.. ]]; then
-	LBUFFER+=/..
-    else
-	LBUFFER+=.
-    fi
-}
-zle -N rationalise-dot
-bindkey . rationalise-dot
+# rationalise-dot() {
+#     if [[ $LBUFFER = *.. ]]; then
+# 	LBUFFER+=/..
+#     else
+# 	LBUFFER+=.
+#     fi
+# }
+# zle -N rationalise-dot
+# bindkey . rationalise-dot
 
 # 提供zz辅助
 zz () {
@@ -436,6 +432,13 @@ limit coredumpsize 0
 bindkey -e
 # 设置DEL键为向后删除
 bindkey "\e[3~" delete-char
+# 历史补全
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+# C-x 列出序号
+autoload -Uz history-beginning-search-menu
+zle -N history-beginning-search-menu
+bindkey '^X^X' history-beginning-search-menu
 # 帮助避免通配符错误删除
 setopt RM_STAR_WAIT
 # 当退出Shell时不结束后台运行任务
@@ -488,7 +491,7 @@ export CLASSPATH="$JAVAHOME/jre/lib:$JAVAHOME/lib"
 # Intel Compiler Collection
 #source /opt/intel/bin/compilervars.sh intel64
 
-# Golang enviroments
+# Go enviroments
 export GOROOT="$CAT/Source/Go-zh"
 export GOPATH="$CAT/Source/Go-Path"
 # export GOARCH_FINAL="$GOROOT"
@@ -499,7 +502,18 @@ export GOOS="darwin"
 # export GOHOSTOS="$GOOS"
 # export GOARM="6"
 export GOBIN="$GOROOT/bin"
-export PATH="$GOBIN:$PATH"
+export PATH="$GOPATH/bin:$GOBIN:$PATH"
+# Go Building Test
+Gobuildtest() {
+	export GOROOT="$CAT/Source/Go"
+	export GOARCH="amd64"
+	export GOOS="darwin"
+	export GOBIN=""
+	export GOPATH=""
+	cd $GOROOT/src
+	./all.bash
+	upenv
+}
 
 # Racket enviroments
 export RACKET="$CAT/.programs/racket"
@@ -517,13 +531,22 @@ export INFOPATH="/usr/local/texlive/texmf/doc/info:$INFOPATH"
 export PATH="$CAT/Source/inferno-os/MacOSX/386/bin:$PATH"
 
 # Plan9port enviroments
-export PLAN9=$CAT/Source/plan9port
-export PATH=$PATH:$PLAN9/bin
+export PLAN9="$CAT/Source/plan9port"
+export PATH="$PATH:$PLAN9/bin"
 
 # LLVM
-export LLVM=$CAT/Source/LLVM/llvm
+export LLVM="$CAT/Source/LLVM"
 
 # MMIX
-export MMIX=$CAT/Source/mmix
-export PATH=$PATH:$MMIX
-# Latest
+export MMIX="$CAT/Source/mmix"
+export PATH="$PATH:$MMIX"
+
+# GAE
+export GAE="$CAT/Source/GAE"
+export APPDIR="$CAT/Source/Go-zh-cn"
+
+# Homebrew
+#export PATH="/usr/local/bin:$PATH"
+
+# Ruby Gem
+export PATH="$PATH:/usr/local/opt/ruby/bin"
