@@ -19,6 +19,8 @@ hgext.purge =
 hgext.color =
 #FileMerge
 #extdiff=
+#Hg-Git
+hggit =
 
 [hostfingerprints]
 #github.com = 4b:b7:cc:81:2c:b9:00:3a:75:97:10:27:43:61:0b:93:d9:7c:3c:19
