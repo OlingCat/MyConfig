@@ -42,17 +42,11 @@ if has("gui_running")
     "set guifont=Ubuntu\ Mono\ 13
 endif
 
+" 设置在状态行显示的信息
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
-                            " 设置在状态行显示的信息
-
-" 显示Tab符
-set listchars=tab:\»\ ,trail:.,extends:>,precedes:<
-if has("autocmd")
-	autocmd filetype javascript,php,python set list
-endif
 
 " 设置字体 以及中文支持
-set guifont=文泉驿等宽微米黑\ 10
+set guifont=Hiragino\ Sans\ GB\ W3\ 14
 " set linespace=0
 
 " set guifont=Consolas:h12
@@ -83,9 +77,10 @@ nmap <F12> :%s,\s\+$,,g<CR>
 " map <f5> :set number!<cr>
 
 " 配置多语言环境
+scriptencoding utf-8
 if has("multi_byte")
 	" UTF-8 编码
-    set encoding=utf-8
+	set encoding=utf-8
     set termencoding=utf-8
     set formatoptions+=mM
     set fencs=utf-8,gbk
@@ -106,6 +101,12 @@ if has("multi_byte")
 else
     echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
+
+" 显示Tab符
+"set listchars=tab:»,trail:.,extends:>,precedes:<
+"if has("autocmd")
+"	autocmd filetype javascript,php,python set list
+"endif
 
 " Vundle - 插件管理
 set nocompatible " be iMproved

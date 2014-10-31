@@ -3,6 +3,7 @@ username = Oling Cat <olingcat@gmail.com>
 verbose = True
 merge = internal:merge
 #设置使用 hg latest 命令来查看最近的 5 条 log
+
 [alias]
 latest = log --limit 5
 glog = glog --limit 25
@@ -26,7 +27,7 @@ hggit =
 #github.com = 4b:b7:cc:81:2c:b9:00:3a:75:97:10:27:43:61:0b:93:d9:7c:3c:19
 #bitbucket.org = 24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b
 #sourceforge.net = e4:ec:3f:6d:2c:0e:d1:96:b6:f7:d5:5b:b5:83:02:ee:f4:7d:db:65
-code.google.com = 05:e7:8e:8d:cb:85:04:1f:d2:99:8c:3f:f9:d3:2f:4f:2d:fb:67:39
+#code.google.com = 05:e7:8e:8d:cb:85:04:1f:d2:99:8c:3f:f9:d3:2f:4f:2d:fb:67:39
 #codereview.appspot.com = da:23:d8:12:35:b4:5d:d7:cc:08:8d:bb:b0:92:c5:16:1c:75:b4:eb
 
 [web]
@@ -41,3 +42,6 @@ filemerge.gui=True
 #[extdiff]
 #cmd.interdiff = hg-interdiff
 #cmd.opendiff = opendiff-w
+
+[http_proxy]
+host = 127.0.0.1:1082

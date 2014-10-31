@@ -12,14 +12,20 @@ date
 # Path shrotcuts
 hash -d S="$CAT/Source"
 hash -d D="$CAT/Downloads"
+hash -d GA="$CAT/Source/GoAgent"
+
+# MacVim
+if [[ -x "/usr/local/bin/mvim" ]]; then
+	alias vim="mvim"
+fi
 
 # Shortcuts
+alias sudo="sudo env PATH=$PATH"
 alias s="sudo"
 alias j="jobs -l"
 alias v="vim"
 alias e="emacs -nw --quick"
 alias l="ls -CF"
-alias ls="ls -F"
 alias ll="ls -alF"
 alias la="ls -aF"
 alias lq="ls -Q"
@@ -39,7 +45,7 @@ alias df="df -h"
 alias du="du -c -h"
 alias nano="nano -w"
 alias ping="ping -c 5"
-alias hide="echo 'NoDisplay=true' >> "
+alias hideapp="echo 'NoDisplay=true' >> "
 alias ax="axel -a -n 10"
 alias vi="vim"
 alias vis="s vim"
@@ -57,12 +63,14 @@ alias cdl="cd $CAT/Downloads"
 alias cds="cd $CAT/Source"
 alias cdg="cd $CAT/Source/Go-zh"
 alias cdo="cd $CAT/Source/Go"
-alias gdc="GOPATH="" godoc -http=:6060"
+alias gdc="GOPATH='' godoc -http=:6060"
 alias upenv=". ~/.zshrc"
-alias ga="launchctl load /Library/LaunchDaemons/org.goagent.macos.plist"
-alias unga="launchctl unload /Library/LaunchDaemons/org.goagent.macos.plist"
+alias enga="sudo launchctl load /Library/LaunchDaemons/org.goagent.macos.plist"
+alias unga="sudo launchctl unload /Library/LaunchDaemons/org.goagent.macos.plist"
+alias ga="/Users/cat/Source/GoAgent/local/goagent-osx.command"
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles -boolean true && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -boolean false && killall Finder"
+alias st='open -a "Sublime Text"'
 
 # yum
 alias yin="s yum install"
@@ -99,6 +107,12 @@ alias brin="brew install"
 alias brrm="brew remove"
 alias brup="brew update && brew upgrade"
 alias brsh="brew search"
+
+# node npm
+alias ndin="npm install -g"
+alias ndrm="npm remove"
+alias ndup="npm update"
+alias ndsh="npm search"
 
 # rp-pppoe
 alias pc="s pppoe-start"
@@ -405,19 +419,32 @@ man() {
                 LESS_TERMCAP_us=$(printf "\e[0;36m") \
                         man "$@"
 }
-# GoAgent Proxy
-proxy() {
-    export all_proxy=socks://127.0.0.1:8087/
-    export ftp_proxy=http://127.0.0.1:8087/
-    export http_proxy=http://127.0.0.1:8087/
-    export https_proxy=http://127.0.0.1:8087/
+# Proxy
+gaproxy() {
+	export all_proxy=http://127.0.0.1:8087/
+	export ftp_proxy=$all_proxy
+	export http_proxy=$all_proxy
+	export https_proxy=$all_proxy
+	export socks_proxy=$all_proxy
+	export rsync_proxy=$all_proxy
+}
+
+ssproxy() {
+	export all_proxy=http://127.0.0.1:1082/
+	export ftp_proxy=$all_proxy
+	export http_proxy=$all_proxy
+	export https_proxy=$all_proxy
+	export socks_proxy=$all_proxy
+	export rsync_proxy=$all_proxy
 }
 
 unproxy() {
-    unset all_proxy
-    unset ftp_proxy
-    unset http_proxy
-    unset https_proxy
+	unset all_proxy
+	unset ftp_proxy
+	unset http_proxy
+	unset https_proxy
+	unset socks_proxy
+	unset rsync_proxy
 }
 # 打印一些素材
 #if [[ -x `which fortune` ]]; then
@@ -515,6 +542,11 @@ Gobuildtest() {
 	upenv
 }
 
+# Dart enviroments
+export DART="/Users/cat/Source/Dart"
+export PATH="$DART/dart-sdk/bin:$PATH"
+
+
 # Racket enviroments
 export RACKET="$CAT/.programs/racket"
 export PATH="$RACKET/bin:$PATH"
@@ -550,3 +582,9 @@ export APPDIR="$CAT/Source/Go-zh-cn"
 
 # Ruby Gem
 export PATH="$PATH:/usr/local/opt/ruby/bin"
+
+# Depot Tools
+export PATH="$CAT/Source/depot_tools:$PATH"
+
+# Tmux
+#test -z "$TMUX" && (tmux attach || tmux new-session)
